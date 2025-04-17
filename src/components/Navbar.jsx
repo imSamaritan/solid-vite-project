@@ -1,4 +1,6 @@
+import { useCartContext } from "../context/CartContext"
 const Navbar = () => {
+  const { items } = useCartContext()
   return (
     <>
       <nav class="navbar navbar-expand-md bg-light m5-5 fixed-top">
@@ -27,7 +29,7 @@ const Navbar = () => {
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" href="/cart">
-                    Cart
+                    Cart({items.length})
                   </a>
                 </li>
               </ul>

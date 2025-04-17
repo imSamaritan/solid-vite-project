@@ -1,7 +1,7 @@
 import Banner from "./components/Banner"
 import Navbar from "./components/Navbar"
 
-function App(props) {
+const App = (props) => {
   return (
     <>
       <header class="container mb-3">

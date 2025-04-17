@@ -2,11 +2,31 @@ import { useParams } from "@solidjs/router"
 import { createResource, Show, createSignal } from "solid-js"
 import ProductService from "../services/ProductService"
 import Card from "../components/Card"
+import { useCartContext } from "../context/CartContext"
 
 const Details = () => {
   const params = useParams()
   const [product] = createResource(params.id, ProductService.find)
   const [totalChars, setTotalChars] = createSignal(56)
+
+  const { items, setCart } = useCartContext()
+
+  const addToCart = () => {
+    //Check if the product is already in the cart
+    const itemExists = items.find((item) => item.id === product().id)
+
+    if (itemExists) {
+      setCart(
+        (prev) => prev.id === product().id,
+        "quantity",
+        (q) => ++q
+      )
+    }
+
+    if (!itemExists) {
+      setCart([...items, { ...product(), quantity: 1 }])
+    }
+  }
 
   return (
     <>
@@ -40,7 +60,11 @@ const Details = () => {
                 </p>
                 <p class="lead display-5">${product().price}</p>
                 <p>
-                  <a href={`#`} class="mx-1 btn btn-warning py-2 px-3">
+                  <a
+                    onClick={addToCart}
+                    href={`#`}
+                    class="mx-1 btn btn-warning py-2 px-3"
+                  >
                     Add To Cart
                   </a>
                 </p>
