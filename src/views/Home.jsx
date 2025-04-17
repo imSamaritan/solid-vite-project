@@ -47,7 +47,7 @@ const Home = () => {
                         {product.description.slice(0, 50)}...
                       </p>
                       <div class="d-flex justify-content-between align-items-center">
-                        <p class="lead display-5">${product.price}</p>
+                        <p class="lead display-5">ZAR{product.price}</p>
                         <p>
                           <a
                             onClick={() => addToCart(product)}

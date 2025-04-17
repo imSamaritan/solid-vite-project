@@ -58,7 +58,7 @@ const Details = () => {
                     </a>
                   </Show>
                 </p>
-                <p class="lead display-5">${product().price}</p>
+                <p class="lead display-5">ZAR{product().price}</p>
                 <p>
                   <a
                     onClick={addToCart}

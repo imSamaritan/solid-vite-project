@@ -4,6 +4,12 @@ import { For } from "solid-js"
 
 const Cart = () => {
   const { items } = useCartContext()
+
+  const totalPrice = () => {
+    return items.reduce((acc, item) => {
+      return acc + item.price * item.quantity
+    }, 0)
+  }
   return (
     <main class="mt-5">
       <Card rounded={true} flat={false}>
@@ -30,14 +36,20 @@ const Cart = () => {
                     <h4 class="text-danger">{item.title}</h4>
                     <p class="lead">Quantity: x{item.quantity}</p>
                     <p class="lead">
-                      Total price: $
-                      {(item.price * item.quantity * 1.49).toFixed(2)}
+                      Total price: ZAR
+                      {(item.price * item.quantity).toFixed(2)}
                     </p>
                   </div>
                 )
               }}
             </For>
           )}
+        </div>
+        <div class="card-footer">
+          <p class="fs-4">
+            Total Price:{" "}
+            <span class="text-danger fw-bold">ZAR{totalPrice()}</span>
+          </p>
         </div>
       </Card>
     </main>
